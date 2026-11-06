@@ -38,3 +38,6 @@ intents/calibration-report.json
 .vscode/
 *.pem
 *.key
+
+# Machine-generated verification output
+docs/live-smoke-report.md

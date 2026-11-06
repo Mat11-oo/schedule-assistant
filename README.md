@@ -232,7 +232,7 @@ python tests/golden/run_golden.py --mode live                    # 真实模型�
 python scripts/harness_golden.py                                 # CI 门禁入口
 ```
 
-接上真实模型后，`python scripts/live_smoke.py` 会把主流程跑一遍并生成 [docs/live-smoke-report.md](docs/live-smoke-report.md)，作为「正常长什么样」的参照。评审 rubric（共情 / 危机处理）：`python -m app.evals.cli`。
+接上真实模型后，`python scripts/live_smoke.py` 会把主流程跑一遍并生成本机验证报告。评审 rubric（共情 / 危机处理）：`python -m app.evals.cli`。
 
 ## 二次开发
 
@@ -288,4 +288,4 @@ def weather_lookup(city: str, user_id: str = "") -> dict:
 
 ## 开源来源
 
-本项目基于 [hubooooooo/Personal-Agent](https://github.com/hubooooooo/Personal-Agent) 进行扩展，沿用 MIT 许可证。原始版权声明见 LICENSE。
+本项目基于 [hubooooooo/Personal-Agent](https://github.com/hubooooooo/Personal-Agent) 进行扩展，沿用 MIT 许可证。本项目修改的版权署名见 LICENSE，原始版权与许可声明见 THIRD_PARTY_NOTICES.md。
