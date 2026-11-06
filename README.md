@@ -286,6 +286,6 @@ def weather_lookup(city: str, user_id: str = "") -> dict:
 
 [MIT](LICENSE)
 
-## 开源来源
+## 维护与许可
 
-本项目基于 [hubooooooo/Personal-Agent](https://github.com/hubooooooo/Personal-Agent) 进行扩展，沿用 MIT 许可证。本项目修改的版权署名见 LICENSE，原始版权与许可声明见 THIRD_PARTY_NOTICES.md。
+项目维护者为 [Mat11-oo](https://github.com/Mat11-oo)，采用 MIT 许可证，详见 LICENSE。
