@@ -68,6 +68,8 @@
 
 | name | 一句话用途 | 风险等级 | 是否需要确认卡 |
 | --- | --- | --- | --- |
+| `library_search` | 搜索本人保存的资料及正文片段 | `read` | 否 |
+| `library_read` | 按资料 ID 分段读取本人原文 | `read` | 否 |
 | `web_fetch` | 读取公开网页正文和来源链接 | `read` | 否 |
 | `web_search` | 搜索公开网页及近期信息 | `read` | 否 |
 | `fetch_feed` | 读取 RSS 或批准的免登录 RSSHub 路由 | `read` | 否 |

@@ -291,21 +291,21 @@ export function renderHero({ onChip }) {
     h("p", { class: "hero-sub", text: "读一份资料，整理一次会议，或聊聊你的安排。" }),
   ]);
   $("log").appendChild(hero);
-  $("main").classList.add("is-empty");
+  $("main")?.classList.add("is-empty");
   const suggestions = $("composerSuggestions");
-  suggestions.replaceChildren(
+  suggestions?.replaceChildren(
     chip("doc", "长文速读", () => workspaceAction("upload")),
     chip("mic", "会议纪要", () => workspaceAction("upload")),
     chip("external", "读取网页", () => workspaceAction("web")),
     chip("edit", "帮我起草", () => onChip("帮我写一封邮件")),
   );
-  suggestions.hidden = false;
+  if (suggestions) suggestions.hidden = false;
 }
 
 export function removeHero() {
-  $("main").classList.remove("is-empty");
-  $("composerSuggestions").hidden = true;
-  $("composerSuggestions").replaceChildren();
+  $("main")?.classList.remove("is-empty");
+  const suggestions = $("composerSuggestions");
+  if (suggestions) { suggestions.hidden = true; suggestions.replaceChildren(); }
   const hero = $("hero");
   if (hero) hero.remove();
 }

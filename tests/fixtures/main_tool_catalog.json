@@ -1,9 +1,11 @@
 {
-  "source_commit": "generic-agent rewrite (31 tools, memory_facts_search flag-gated)",
+  "source_commit": "Document library tools added to default catalog (33 tools)",
   "names": [
     "draft_text",
     "fetch_feed",
     "get_hn",
+    "library_read",
+    "library_search",
     "memory_card",
     "memory_context",
     "memory_delete",
@@ -33,6 +35,6 @@
     "web_fetch",
     "web_search"
   ],
-  "catalog_sha256": "45e8994f2fd677a8200b1cdae7a4d7bc5c3654e3c939d7686c4f2727eeba81e4",
-  "model_catalog_sha256": "5eece99b8dd3d428705ec972d15d1d79f662bd0178e3af1c6661f15486d3149d"
+  "catalog_sha256": "71f2cba85e9c57b128bf1474953fdd4bbcfcf9b721dd0b210b1538834204a686",
+  "model_catalog_sha256": "5517fdbbedb2c8191a88f28a01fbeea50395d9df84c2706b6b23c8dd5bb0045f"
 }

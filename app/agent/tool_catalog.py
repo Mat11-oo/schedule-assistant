@@ -3,6 +3,8 @@
 Rows are explicit product contracts: description | use | do not use | seconds.
 """
 _ROWS = {
+'library_search': ('搜索本人保存的资料并返回正文片段。 Search the owner’s saved documents and excerpts.', '查找或列出应用内文档时使用。 Use to find or list saved materials.', '不用于磁盘路径、他人资料或网页搜索。 Never access arbitrary paths, other users or public web search.', 30),
+'library_read': ('按资料 ID 分段读取本人原文。 Read an owned document by ID and offset.', '读取已知资料或继续读取片段时使用。 Use to read a known document or continue a page.', '不读取他人或已删除资料，不推断未提取内容。 Never read other owners, deleted files or invent unextracted text.', 30),
 'schedule.create': ('生成定时任务确认卡，用户确认后创建。 Propose a personal schedule for user approval.', '建立一次性提醒或自定义只读指令日程。 Use for reminders or custom read-only schedules.', '时间或内容不明确时先追问；确认卡不代表已创建。 Clarify missing time or content; a proposal is not a saved schedule.', 30),
 'schedule.list': ('查看本人定时任务及运行次数。 List the current user’s schedules and run counts.', '用户想查看有哪些定时任务时使用。 Use when the user asks about their scheduled tasks.', '不得查询他人任务或把列表当成运行结果。 Never list another user’s tasks or claim execution from a listing.', 30),
 'schedule.update': ('生成修改定时任务的确认卡。 Propose changes to an owned schedule for approval.', '用户要求修改明确任务的时间或内容时使用。 Use to propose a time or content change to a specified task.', '目标不唯一时先追问；确认前不得声称已修改。 Clarify ambiguous targets; do not claim changes before approval.', 30),

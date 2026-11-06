@@ -24,7 +24,7 @@ MEMORY_TOOLS = {
 }
 PROFILE_TOOLS = {"profile_read", "profile_save", "profile_update"}
 # memory_facts_search appears only when the vector flag is on.
-TOOL_COUNT = 31
+TOOL_COUNT = 33
 DRAFT_REQUEST = "帮我写一封请假邮件，周五请一天假"
 
 
