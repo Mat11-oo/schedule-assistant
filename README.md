@@ -1,8 +1,10 @@
 <div align="center">
 
-# Personal Agent
+# 日程助理
 
 **帮助整理资料、会议、任务与日程的个人助理**
+
+维护者 [Mat11-oo](https://github.com/Mat11-oo)
 
 上传资料、提炼重点、确认行动项、安排时间与跟进进度。<br>
 任何会产生后果的动作，都先给你一张确认卡。
@@ -31,7 +33,7 @@ LangGraph · FastAPI · 原生 JS 前端 · 可二次开发 · MIT
 
 当前为开发版 MVP。模型、OCR 和转写效果及完整业务流程仍需真实验收。资料向量检索与外部日历自动同步待接入。
 
-## 个人安排扩展（本地二开）
+## 资料与日程管理
 
 macOS 本机可双击根目录的 `启动Personal-Agent.command` 与 `停止Personal-Agent.command` 管理服务。左侧导航底部「设置」集中显示模型配置、后台运行状态和开始指南，见 [本机使用说明](docs/local-use.md)。
 
@@ -52,7 +54,7 @@ macOS 本机可双击根目录的 `启动Personal-Agent.command` 与 `停止Pers
 需要 Python 3.12。
 
 ```bash
-git clone https://github.com/Mat11-oo/Personal-Agent.git && cd Personal-Agent
+git clone https://github.com/Mat11-oo/schedule-assistant.git && cd schedule-assistant
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt -c requirements.lock
 cp .env.example .env

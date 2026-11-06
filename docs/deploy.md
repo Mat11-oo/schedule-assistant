@@ -6,7 +6,7 @@
 
 打开（需已登录 Render，并授权 GitHub 仓库）：
 
-**https://render.com/deploy?repo=https://github.com/Mat11-oo/Personal-Agent**（fork 后把仓库地址换成你自己的）
+**https://render.com/deploy?repo=https://github.com/Mat11-oo/schedule-assistant**（fork 后把仓库地址换成你自己的）
 
 会读取根目录 `render.yaml` Blueprint，创建 Docker Web Service（free）。
 
