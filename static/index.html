@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#101014" />
+    <meta name="app-version" content="__APP_VERSION__" />
+    <title>Personal Agent</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%2216%22%20fill%3D%22%231b1b22%22%2F%3E%3Ctext%20x%3D%2215%22%20y%3D%2223%22%20font-size%3D%2224%22%20text-anchor%3D%22middle%22%20fill%3D%22%23c3baff%22%20font-family%3D%22sans-serif%22%3Ep.%3C%2Ftext%3E%3C%2Fsvg%3E" />
+    <link rel="preload" href="/static/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/static/design.css?v=__APP_VERSION__" />
+    <link rel="stylesheet" href="/static/chat.css?v=__APP_VERSION__" />
+    <link rel="stylesheet" href="/static/arrangements.css?v=__APP_VERSION__" />
+    <link rel="stylesheet" href="/static/workspace.css?v=__APP_VERSION__" />
+    <link rel="stylesheet" href="/static/craft.css?v=__APP_VERSION__" />
+    <script type="module" src="/static/js/app.js?v=__APP_VERSION__"></script>
+  </head>
+  <body class="app chat-app">
+    <a class="skip-link" href="#workspaceTitle">
+      跳到工作区
+    </a>
+    <aside class="workspace-sidebar" id="workspaceSidebar" aria-label="个人工作空间">
+      <button type="button" class="craft-space-switcher" id="workspaceSwitcher" aria-label="打开空间设置">
+        <span class="ws-brand-mark" aria-hidden="true">p.</span>
+        <strong>我的空间</strong>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m8 10 4 4 4-4"/>
+        </svg>
+      </button>
+      <button type="button" class="ws-nav-item craft-new-document" data-workspace-action="collect">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="5" y="3" width="14" height="18" rx="2"/>
+          <path d="M9 8h6M9 12h6"/>
+        </svg>
+        <span>新建文档</span>
+      </button>
+      <button type="button" class="ws-search" id="workspaceSearch">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="10.5" cy="10.5" r="6.5"/>
+          <path d="m16 16 4 4"/>
+        </svg>
+        <span>搜索与快速打开</span>
+        <kbd id="searchShortcut">⌘ K</kbd>
+      </button>
+      <nav class="ws-nav" aria-label="主要功能">
+        <button type="button" class="ws-nav-item" data-arrangement-view="home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m3 10 9-7 9 7v10a1 1 0 01-1 1h-5v-8H9v8H4a1 1 0 01-1-1z"/>
+          </svg>
+          <span>首页</span>
+        </button>
+        <button type="button" class="ws-nav-item" data-arrangement-view="sources">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="5" y="3" width="14" height="18" rx="2"/>
+            <path d="M9 8h6M9 12h6"/>
+          </svg>
+          <span>所有文档</span>
+        </button>
+        <button type="button" class="ws-nav-item" data-arrangement-view="tasks">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5"/>
+            <path d="m7 12 3 3 7-7"/>
+          </svg>
+          <span>任务</span>
+        </button>
+        <button type="button" class="ws-nav-item" data-arrangement-view="today">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="16" rx="3"/>
+            <path d="M8 3v4m8-4v4M3 11h18m-12 4h.01m3 0h.01m3 0h.01m-6 3h.01m3 0h.01"/>
+          </svg>
+          <span>日历</span>
+        </button>
+        <button type="button" class="ws-nav-item" data-arrangement-view="connections">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 17H5a4 4 0 010-8 7 7 0 0113-1 4.5 4.5 0 01.5 9H16"/>
+          </svg>
+          <span>连接</span>
+        </button>
+      </nav>
+      <details class="craft-nav-group" open>
+        <summary>
+          收藏
+        </summary>
+        <div id="craftStarred">
+          <p class="craft-nav-empty">正在读取…</p>
+        </div>
+      </details>
+      <details class="craft-nav-group" open>
+        <summary>
+          文件夹
+        </summary>
+        <button type="button" class="btn-icon craft-add-folder" id="craftAddFolder" aria-label="新建文件夹">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+        </button>
+        <div id="craftFolders">
+        </div>
+      </details>
+      <details class="craft-nav-group">
+        <summary>
+          标签
+        </summary>
+        <div id="craftTags">
+        </div>
+      </details>
+      <div class="ws-sidebar-bottom">
+        <div class="header-actions">
+          <button type="button" class="btn btn-quiet btn-sm header-btn" id="btnSetup" data-arrangement-view="setup" aria-label="设置与开始指南">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 7h16M4 17h16"/>
+              <circle cx="8" cy="7" r="3"/>
+              <circle cx="16" cy="17" r="3"/>
+            </svg>
+            <span class="header-btn-label">设置</span>
+          </button>
+          <button type="button" class="btn btn-quiet btn-sm header-btn" id="btnMemory" aria-label="我记得的">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 4h12a1 1 0 011 1v16l-7-4-7 4V5a1 1 0 011-1z"/>
+            </svg>
+            <span class="header-btn-label">记忆</span>
+          </button>
+          <button type="button" class="btn btn-ghost btn-sm header-btn" id="btnSchedules" aria-label="定时任务" aria-expanded="false" aria-controls="schedulesPanel">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 7v5l3 2"/>
+            </svg>
+            <span class="header-btn-label">定时</span>
+          </button>
+          <button type="button" class="btn btn-ghost btn-sm header-btn" id="btnProfile" aria-label="我的个人档案" aria-expanded="false" aria-controls="drawer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>
+            </svg>
+            <span class="header-btn-label">档案</span>
+          </button>
+        </div>
+        <div class="ws-local">
+          <span aria-hidden="true"></span>
+          本机工作空间
+        </div>
+      </div>
+    </aside>
+    <button type="button" class="ws-sidebar-scrim" id="sidebarScrim" tabindex="-1" aria-label="收起导航" hidden>
+    </button>
+    <div class="workspace-content" id="workspaceContent">
+      <header class="ws-topbar">
+        <button type="button" class="craft-mobile-space" id="craftMobileSpace" aria-label="打开空间设置">
+          <span>p.</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="m15 4-8 8 8 8"/>
+          </svg>
+        </button>
+        <div class="craft-mobile-header-tools">
+          <button type="button" id="craftMobileMore" aria-label="更多选项">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <circle cx="5" cy="12" r="1.5"/>
+              <circle cx="12" cy="12" r="1.5"/>
+              <circle cx="19" cy="12" r="1.5"/>
+            </svg>
+          </button>
+          <button type="button" id="craftMobileReminders" aria-label="查看站内提醒">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9M10 21h4"/>
+            </svg>
+          </button>
+        </div>
+        <button type="button" class="btn-icon ws-toggle" id="sidebarToggle" aria-controls="workspaceSidebar" aria-expanded="true" aria-label="收起导航">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="16" rx="3"/>
+            <path d="M9 4v16"/>
+          </svg>
+        </button>
+        <div class="craft-history">
+          <button type="button" class="btn-icon" id="craftBack" aria-label="返回上一页" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m15 5-7 7 7 7"/>
+            </svg>
+          </button>
+          <button type="button" class="btn-icon" id="craftForward" aria-label="前往下一页" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m9 5 7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+        <div class="craft-tabs" id="craftTabs" role="tablist" aria-label="已打开的文档">
+        </div>
+        <button type="button" class="btn-icon craft-tab-add" data-workspace-action="collect" aria-label="新建文档">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+        </button>
+        <div class="ws-breadcrumb">
+          <h1 id="workspaceTitle" tabindex="-1">Personal Agent</h1>
+        </div>
+        <div class="debug-badges debug-only" id="debugBadges" aria-label="调试信息">
+        </div>
+        <span class="header-spacer"></span>
+        <span class="ws-date" id="workspaceDate"></span>
+        <button type="button" class="btn-icon" id="craftPanelToggle" aria-controls="craftInspector" aria-expanded="false" aria-label="展开右侧面板">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="16" rx="3"/>
+            <path d="M15 4v16"/>
+          </svg>
+        </button>
+        <button type="button" class="btn-icon ws-theme-toggle" id="themeToggle" aria-label="切换浅色外观" title="切换浅色外观">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4L19 5"/>
+          </svg>
+        </button>
+      </header>
+      <div class="layout">
+        <main class="chat-main" id="main">
+          <div class="log-scroll" id="logScroll">
+            <div class="log" id="log" role="log" aria-live="off" aria-label="对话记录">
+            </div>
+          </div>
+          <form class="composer" id="composer" autocomplete="off">
+            <button type="button" class="jump-latest" id="jumpLatest" hidden>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 5v14"/>
+                <path d="M19 12l-7 7-7-7"/>
+              </svg>
+              新消息
+            </button>
+            <div class="composer-inner">
+              <div class="composer-shell" id="composerShell">
+                <label class="sr-only" for="composerInput">给小助发消息</label>
+                <textarea id="composerInput" rows="1" enterkeyhint="send" placeholder="问问小助，或说说你正在做的事…" aria-describedby="composerHint"></textarea>
+                <div class="composer-toolbar">
+                  <details class="composer-tools" id="composerTools">
+                    <summary aria-label="添加资料">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 5v14M5 12h14"/>
+                      </svg>
+                    </summary>
+                    <div class="composer-tool-menu">
+                      <p>收集到资料库</p>
+                      <button type="button" data-workspace-action="upload">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9zM14 3v6h6"/>
+                        </svg>
+                        <span>上传 PDF 或会议录音</span>
+                      </button>
+                      <button type="button" data-workspace-action="web">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <circle cx="12" cy="12" r="9"/>
+                          <path d="M3 12h18M12 3c5 5 5 13 0 18-5-5-5-13 0-18z"/>
+                        </svg>
+                        <span>读取网页</span>
+                      </button>
+                      <button type="button" data-workspace-action="collect">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M21 11.5a8.4 8.4 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.4 8.4 0 01-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.4 8.4 0 013.8-.9h.5a8.5 8.5 0 018 8v.5z"/>
+                        </svg>
+                        <span>粘贴消息或文字稿</span>
+                      </button>
+                    </div>
+                  </details>
+                  <span class="composer-mode">
+                    小助
+                    <span class="composer-mode-dot" aria-hidden="true"></span>
+                    个人助理
+                  </span>
+                  <span class="header-spacer"></span>
+                  <button type="submit" class="btn btn-primary btn-send" id="btnSend" aria-label="发送">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M12 19V5"/>
+                      <path d="M5 12l7-7 7 7"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="composer-error" id="composerError" role="alert" hidden>
+              </div>
+              <div class="composer-hint" id="composerHint">
+                <span id="composerHintKeys">Enter 发送 · Shift + Enter 换行</span>
+                <span class="hint-right">草稿与行动项，由你确认</span>
+              </div>
+              <div class="composer-suggestions" id="composerSuggestions" aria-label="快捷开始" hidden>
+              </div>
+            </div>
+          </form>
+        </main>
+        <main id="arrangementPanel" class="ar-main" hidden aria-labelledby="arrangementTitle">
+          <div class="ar-container">
+            <div class="ar-heading">
+              <div>
+                <p class="ws-eyebrow" id="arrangementEyebrow">留出时间，专注重要的事</p>
+                <h2 id="arrangementTitle" tabindex="-1">今日安排</h2>
+              </div>
+              <div class="ar-actions">
+                <button type="button" class="btn btn-ghost btn-sm" id="arRefresh">
+                  刷新
+                </button>
+                <button type="button" class="btn btn-ghost btn-sm" id="arUpload">
+                  上传文件
+                </button>
+                <button type="button" class="btn btn-ghost btn-sm" id="arWeb">
+                  读取网页
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" id="arAddSource">
+                  收集信息
+                </button>
+              </div>
+            </div>
+            <p class="ar-note" id="arrangementStatus" role="status"></p>
+            <div id="arrangementBody">
+            </div>
+          </div>
+        </main>
+        <aside class="drawer" id="drawer" aria-labelledby="drawerTitle" inert>
+          <div class="drawer-inner">
+            <div class="drawer-head">
+              <h2 id="drawerTitle">我的个人档案</h2>
+              <button type="button" class="btn-icon" id="btnDrawerClose" aria-label="收起档案">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 6L6 18"/>
+                  <path d="M6 6l12 12"/>
+                </svg>
+              </button>
+            </div>
+            <div class="drawer-body" id="drawerBody">
+            </div>
+            <section class="drawer-section drawer-account" aria-labelledby="accountTitle">
+              <h3 class="drawer-section-title" id="accountTitle">账号与本机数据</h3>
+              <label class="dw-field-label debug-only" for="userId">User ID</label>
+              <input class="field-input debug-only" id="userId" value="" readonly spellcheck="false" autocapitalize="off" aria-describedby="userIdHint" />
+              <p class="dw-note debug-only" id="userIdHint">由服务器会话决定，只读。</p>
+              <div class="dw-account-actions">
+                <button type="button" class="btn btn-ghost btn-sm" id="btnClearLocal">
+                  清除本机对话记录
+                </button>
+              </div>
+              <p class="dw-note">档案保存在服务端；对话记录只保存在这台设备的浏览器里。</p>
+              <p class="dw-version">Personal Agent v__APP_VERSION__</p>
+            </section>
+          </div>
+        </aside>
+        <aside id="craftInspector" class="craft-inspector" aria-label="文档工具" hidden>
+          <div class="craft-inspector-resize" id="craftInspectorResize" role="separator" tabindex="0" aria-label="调整右侧面板宽度" aria-orientation="vertical" aria-valuemin="240" aria-valuemax="440" aria-valuenow="300">
+          </div>
+          <div class="craft-inspector-head">
+            <div class="craft-inspector-tabs" role="tablist" aria-label="文档工具">
+              <button type="button" role="tab" data-inspector-tab="outline" aria-selected="true">
+                目录
+              </button>
+              <button type="button" role="tab" data-inspector-tab="info" aria-selected="false">
+                信息
+              </button>
+              <button type="button" role="tab" data-inspector-tab="assistant" aria-selected="false">
+                助手
+              </button>
+            </div>
+            <button type="button" class="btn-icon" id="craftPanelClose" aria-label="收起右侧面板">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m6 6 12 12M6 18 18 6"/>
+              </svg>
+            </button>
+          </div>
+          <div class="craft-inspector-body" id="craftInspectorBody">
+          </div>
+        </aside>
+      </div>
+    </div>
+    <nav class="craft-mobile-dock" aria-label="底部导航">
+      <div class="craft-mobile-pages">
+        <button type="button" data-arrangement-view="home" aria-label="首页">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m3 10 9-7 9 7v10a1 1 0 01-1 1h-5v-8H9v8H4a1 1 0 01-1-1z"/>
+          </svg>
+        </button>
+        <button type="button" data-arrangement-view="tasks" aria-label="任务">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5"/>
+            <path d="m7 12 3 3 7-7"/>
+          </svg>
+        </button>
+        <button type="button" data-arrangement-view="today" aria-label="日历">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="16" rx="3"/>
+            <path d="M8 3v4m8-4v4M3 11h18m-12 4h.01m3 0h.01m3 0h.01m-6 3h.01m3 0h.01"/>
+          </svg>
+        </button>
+      </div>
+      <div class="craft-mobile-tools">
+        <button type="button" class="craft-assistant-orb" id="craftMobileAssistant" aria-label="打开小助">
+        </button>
+        <details class="craft-mobile-create" id="craftMobileCreate">
+          <summary aria-label="新建或导入">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 5v14M5 12h14"/>
+            </svg>
+          </summary>
+          <div class="composer-tool-menu">
+            <button type="button" data-workspace-action="collect">
+              新建文档／粘贴文字
+            </button>
+            <button type="button" data-workspace-action="upload">
+              上传 PDF 或会议录音
+            </button>
+            <button type="button" data-workspace-action="web">
+              读取网页
+            </button>
+          </div>
+        </details>
+      </div>
+    </nav>
+    <dialog id="craftQuickOpen" class="craft-quick-open" aria-labelledby="craftQuickTitle">
+      <div class="ar-dialog-head">
+        <h2 id="craftQuickTitle">搜索与快速打开</h2>
+        <button type="button" class="btn-icon" id="craftQuickClose" aria-label="关闭搜索">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m6 6 12 12M6 18 18 6"/>
+          </svg>
+        </button>
+      </div>
+      <label class="sr-only" for="craftQuickInput">搜索资料</label>
+      <input id="craftQuickInput" class="field-input" type="search" maxlength="200" placeholder="搜索文档、摘要和原文…" autocomplete="off"/>
+      <div id="craftQuickResults" class="craft-quick-results" role="status">
+      </div>
+    </dialog>
+    <div class="backdrop" id="backdrop">
+    </div>
+    <div class="toast-wrap" id="toastWrap" role="status" aria-live="polite">
+    </div>
+    <div class="sr-only" id="srAnnounce" aria-live="polite" aria-atomic="true">
+    </div>
+    <dialog id="schedulesPanel" class="schedules-panel" aria-labelledby="schedulesTitle">
+      <div class="drawer-head">
+        <h2 id="schedulesTitle">定时任务</h2>
+        <button type="button" class="btn btn-ghost btn-sm" id="btnSchedulesClose" aria-label="关闭定时任务">
+          关闭
+        </button>
+      </div>
+      <div id="schedulesBody" class="drawer-body">
+      </div>
+    </dialog>
+    <noscript>
+      <p class="noscript">需要开启 JavaScript 才能和小助对话。</p>
+    </noscript>
+    <dialog id="arrangementDialog" class="ar-dialog" aria-labelledby="arDialogTitle">
+    </dialog>
+  </body>
+</html>
